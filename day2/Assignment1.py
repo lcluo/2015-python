@@ -12,7 +12,7 @@ import requests
 
 
 # You'll need to change this to the key from the email
-usda_key = 'ED2021A2-1416-3A82-A5A7-3E84F26167B7'
+usda_key = "A92362AA-3706-3CCC-859D-95A3A2A2E89C"
 
 # If you save this publicly to Github then it's better to keep your key in
 # a separate private plain text file called 'usda_key.txt'
@@ -32,8 +32,11 @@ def get_param_values(param, key=usda_key):
 
     '''
     # Your task- fill this in
+    base = "http://quickstats.nass.usda.gov/api/get_param_values/?key=" + usda_key + "&param=" + param + "&format=JSON"
+    response = requests.get(base)
+    value = response.json()
+    return value[param]   
     pass
-
 
 def query(parameters, key=usda_key):
     '''
@@ -47,10 +50,14 @@ def query(parameters, key=usda_key):
     >>> cowparams = {'commodity_desc': 'CATTLE',
                      'state_name': 'CALIFORNIA',
                      'county_name': 'TEHAMA'}
-    >>> tehamacow = query(cowparams)
+    >>> 
 
     '''
     # Your task- fill this in
+    base = "http://quickstats.nass.usda.gov/api/api_GET/?key=" + usda_key
+    response = requests.get(base, params = parameters)
+    value = response.json()
+    return value['data']
     pass
 
 
@@ -74,7 +81,17 @@ if __name__ == '__main__':
 
     yolorice = query(riceparams)
 
+tobaccoparams={'sector_desc': 'CROPS',
+'commodity_desc': 'TOBACCO',
+'year': '2012',
+'agg_level_desc': 'STATE',
+'statisticcat_desc': 'PRODUCTION',
+'unit_desc': '$',
+'reference_period_desc': 'YEAR',
+'short_desc': 'TOBACCO - PRODUCTION, MEASURED IN $'
+}
+
     # Try using a dictionary comprehension to filter
-    yearvalue = {x['year']: x['Value'] for x in yolorice}
+  #  yearvalue = {x['year']: x['Value'] for x in yolorice}
     # Expect:
     # {'2007': '26,697,000', '2012': '51,148,000'}
