@@ -11,7 +11,7 @@ import turtle
 
 import numpy as np
 
-def random_walk(n):
+def random_walk(n, pp = [0.25, 0.25, 0.25, 0.25], x_start = 0, y_start = 0):
     ''' Simulate a two-dimensional random walk.
 
     Args:
@@ -23,9 +23,20 @@ def random_walk(n):
     '''
 
     # Your task: fill this in.
+    
+    if sum(pp) != 1 :
+    	raise ValueError('p does not have length 4!')
+    Exception
+    	
+    xx = [0, 0, -1, 1]
+    yy = [1, -1, 0, 0]
+    
+    p = np.random.choice(4, n, p = pp)
+    x = x_start + sum([xx[k] for k in p])
+    y = y_start + sum([yy[k] for k in p])
+ 
 
     return x, y
-
 
 
 # Notice that the documentation automatically shows up when you use ?
