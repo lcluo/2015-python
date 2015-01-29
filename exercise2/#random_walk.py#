@@ -11,7 +11,7 @@ import turtle
 
 import numpy as np
 
-def random_walk(n, x_start = 0, y_start = 0, pp = [0.25, 0.25, 0.25, 0.25]):
+def random_walk(n, pp = [0.25, 0.25, 0.25, 0.25], x_start = 0, y_start = 0):
     ''' Simulate a two-dimensional random walk.
 
     Args:
@@ -32,8 +32,9 @@ def random_walk(n, x_start = 0, y_start = 0, pp = [0.25, 0.25, 0.25, 0.25]):
     yy = [1, -1, 0, 0]
     
     p = np.random.choice(4, n, p = pp)
-    x = x_start + np.insert(np.asarray([xx[k] for k in p]),0,0).cumsum()
-    y = y_start + np.insert(np.asarray([yy[k] for k in p]),0,0).cumsum()
+    x = x_start + np.asarray([xx[k] for k in p])
+    y = y_start + np.asarray([yy[k] for k in p])
+ 
 
     return x, y
 
